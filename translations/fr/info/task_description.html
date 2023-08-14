@@ -1,0 +1,67 @@
+<!-- Describe task in general -->
+
+<p style="text-align: center;">
+    <img  title="example" src="{{MEDIA}}work-schedule.png" alt="example" style="max-height: 300px"/>
+</p>
+
+<p style="text-align: justify;">
+    Vous disposez d'une séquence de salariés avec leurs préférences de travail et leurs compétences. Vous avez également des besoins professionnels en termes de temps de travail et de tâches. Votre fonction doit renvoyer un planning qui répond aux besoins de l'entreprise avec les employés disponibles (si c'est possible). Entrons maintenant dans les détails.
+</p>
+<p style="text-align: justify;">
+    <b>staff</b> est un dictionnaire{% if is_js %}n Object{% else %}{% endif %} , où les clés sont des noms d'employés et les valeurs sont des dictionnaires {% if is_js %}Object{% else %}{% endif %} également. Chaque dictionnaire {% if is_js %}Object{% else %}{% endif %} comprend trois paires clé-valeur:
+    <ul>
+        <li>
+            <b>"pref_shifts"</b> - {% if is_js %}tableau{% else %}liste{% endif %} de chaînes de caractères: équipes, l'employé veut travailler à (peut être <b>"first"</b>, <b>"second"</b> ou les deux dans cet ordre);
+        </li>
+        <li>
+            <b>"days_off"</b> - {% if is_js %}array{% else %}list{% endif %} of strings: days, employee wants to be off (full names of weekdays);
+        </li>
+        <li>
+            <b>"skills"</b> - {% if is_js %}array{% else %}list{% endif %} of strings: jobs, employee may do.
+        </li>
+    </ul>
+</p>
+<p style="text-align: justify;">
+    <b>business_needs</b> est un tableau{% if is_js %}n{% else %} list{% endif %} de trois valeurs: un jour de la semaine pour lequel établir un horaire - chaîne de caractères; le nombre d'équipes à effectuer ce jour - nombre entier; les tâches à effectuer ce jour - {% if is_js %}tableau{% else %}list{% endif %} de chaînes de caractères.
+</p>
+<p style="text-align: justify;">
+    Remarque concernant les équipes. Chaque employé peut travailler à la première équipe, à la deuxième ou aux deux (toute la journée), à l'exception de ses jours de congé. Le nombre d'équipes pour une entreprise signifie le nombre d'équipes différentes présentes ce jour-là. Par exemple, si le nombre d'équipes est de <b>3</b>, il peut être couvert par un salarié qui travaille toute la journée (ses deux équipes, "première" et "deuxième", au total - 2) et par n'importe quel autre salarié (car chaque salarié a au moins une équipe), ou par trois équipes d'un salarié différent. Le nombre d'équipes doit être réparti de manière égale entre les équipes de jour <b>"first"</b> et <b>"second"</b>. Si le nombre d'équipes est impair (et différent de 1), l'équipe de jour <b>"first"</b> doit comprendre une équipe de plus que l'équipe de jour <b>"second"</b>.    
+</p>
+<p style="text-align: justify;">
+    Les compétences peuvent être partiellement/totalement les mêmes pour différents employés. Par conséquent, lorsque vous remplissez les équipes de jour, choisissez les salariés ayant le moins de compétences - ils sont généralement moins bien payés. Si le nombre de compétences est identique, choisissez-les par ordre alphabétique. Du point de vue de l'engagement des employés, l'équipe du premier jour est prioritaire: il est plus important d'avoir des employés ayant moins de compétences. Les tâches constituent une séquence minimale à accomplir - la séquence des compétences agrégées pour ce jour peut être plus large. Chaque tâche doit être effectuée (couverte par la compétence correspondante) par une personne de l'équipe de jour <b>"first"</b> ou <b>"second"</b>.
+</p>
+<p style="text-align: justify;">
+    Votre fonction doit renvoyer un tableau{% if is_js %}n de deux tableaux{% else %} liste de deux listes{% endif %} (équipes de jour) avec les noms triés par ordre alphabétique des employés qui vont travailler à l'équipe de jour correspondante. Si le nombre d'équipes est <b>1</b> - l'un des tableaux intérieurs {% if is_js %}{% else %} listes{% endif %} sera vide. S'il n'est pas possible d'établir un calendrier, les deux tableaux intérieurs {% if is_js %}{% else %} lists{% endif %} doivent être vides.
+</p>
+
+<!-- Explain input and output values -->
+<p>
+   <strong>Entrée:</strong> Deux arguments: {% if is_js %}un objet{% else %}un dictionnaire{% endif %} avec les données des employés,{% if is_js %}n tableau{% else %} liste{% endif %} avec la description des besoins de l'entreprise.
+</p>
+
+<p>
+   <strong>Résultat:</strong> Un{% if is_js %}n tableau de deux tableaux{% else %} liste de deux listes{% endif %} avec des noms sous forme de chaînes de caractères. 
+</p>
+
+
+<p>
+    <strong>Exemples:</strong>
+</p>
+
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+
+<!-- Here you can explain how it can be used in development -->
+<!-- The section is optional -->
+<!-- <p class="for_info_only">
+    <strong>How it’s used:</strong>
+    <i>Schedule optimizing is a usual thing.</i>
+</p> -->
+
+<!-- Here you can explain some constraints for input-->
+<!-- The section is optional -->
+<!-- <p>
+    <strong>Preconditions:</strong>
+    <ul>
+    <li><i>both given ints should be between -1000 and 1000</i></li>
+    </ul>
+</p> -->
