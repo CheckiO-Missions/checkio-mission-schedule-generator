@@ -1,0 +1,67 @@
+<!-- Describe task in general -->
+
+<p style="text-align: center;">
+    <img  title="example" src="{{MEDIA}}work-schedule.png" alt="example" style="max-height: 300px"/>
+</p>
+
+<p style="text-align: justify;">
+    Otrzymują Państwo sekwencję pracowników wraz z ich preferencjami i umiejętnościami. Mają Państwo również potrzeby biznesowe dotyczące wymaganego czasu pracy i zadań. Państwa funkcja powinna zwrócić harmonogram, który spełnia potrzeby biznesowe z dostępnymi pracownikami (jeśli jest to możliwe). Przejdźmy teraz do szczegółów.
+</p>
+<p style="text-align: justify;">
+    <b>staff</b> jest słownikiem{% if is_js %}n Object{% else %}{% endif %} , gdzie kluczami są nazwiska pracowników, a wartościami są słowniki {% if is_js %}Objects{% else %}{% endif %}. Każda wartość {% if is_js %}Object{% else %}dictionary{% endif %} zawiera trzy pary klucz-wartość:
+    <ul>
+        <li>
+            <b>"pref_shifts"</b> - {% if is_js %}tablica{% else %}lista{% endif %} ciągów znaków: zmiany, pracownik chce pracować na (może być <b>"first"</b>, <b>"second"</b> lub oba w tej kolejności);
+        </li>
+        <li>
+            <b>"days_off"</b> - {% if is_js %}tablica{% else %}lista{% endif %} ciągów znaków: dni, w które pracownik chce mieć wolne (pełne nazwy dni tygodnia);
+        </li>
+        <li>
+            <b>"skills"</b> - {% if is_js %}tablica{% else %}lista{% endif %} ciągów znaków: prace, które pracownik może wykonywać.
+        </li>
+    </ul>
+</p>
+<p style="text-align: justify;">
+    <b>business_needs</b> to tablica{% if is_js %}n{% else %} lista{% endif %} trzech wartości: dzień tygodnia, na który ma być sporządzony grafik - string; liczba zmian, które mają być w tym dniu - liczba całkowita; zadania, które mają być wykonane w tym dniu - {% if is_js %}tablica{% else %}lista{% endif %} ciągów znaków.
+</p>
+<p style="text-align: justify;">
+    Proszę zwrócić uwagę na zmiany. Każdy pracownik może pracować na pierwszej, drugiej lub obu zmianach (przez cały dzień), z wyłączeniem dni wolnych. Liczba zmian dla firmy oznacza liczbę różnych zmian, które mają być obecne w tym dniu. Na przykład, jeśli liczba zmian <b>3</b>, może być pokryta przez pracownika, który pracuje cały dzień (obie jego zmiany, "pierwsza" i "druga", łącznie - 2) i dowolnego pracownika więcej (ponieważ każdy pracownik ma co najmniej jedną zmianę), lub przez trzy zmiany różnych pracowników. Liczba zmian powinna być podzielona równo pomiędzy <b>"first"</b> i <b>"second"</b> zmiany dzienne. Jeśli liczba zmian jest nieparzysta (i nie jest równa 1), zmiana dzienna <b>"first"</b> musi obejmować o jedną zmianę więcej niż zmiana dzienna <b>"second"</b>.    
+</p>
+<p style="text-align: justify;">
+    Umiejętności mogą być częściowo/całkowicie takie same dla różnych pracowników. W związku z tym przy obsadzaniu zmian dziennych należy wybierać pracowników z mniejszą liczbą umiejętności - są oni zazwyczaj gorzej opłacani. Jeśli ich liczba jest taka sama - proszę wybierać alfabetycznie według nazwisk. Z punktu widzenia zaangażowania pracowników, pierwsza zmiana dzienna ma pierwszeństwo: ważniejsze jest, aby byli na niej pracownicy z mniejszą liczbą umiejętności. Zadania to minimalna sekwencja do wykonania - sekwencja zagregowanych umiejętności na ten dzień może być szersza. Każde zadanie musi być wykonane (objęte odpowiednią umiejętnością) przez kogoś na zmianie dziennej <b>"first"</b> lub <b>"second"</b>.
+</p>
+<p style="text-align: justify;">
+    Państwa funkcja powinna zwrócić tablicę{% if is_js %}n składającą się z dwóch tablic{% else %} lista dwóch list{% endif %} (zmiany dzienne) z alfabetycznie posortowanymi nazwiskami pracowników, którzy będą pracować na danej zmianie dziennej. Jeśli liczba zmian wynosi <b>1</b> - jedna z wewnętrznych tablic {% if is_js %}{% else %} list{% endif %} będzie pusta. Jeśli nie jest możliwe utworzenie harmonogramu - obie wewnętrzne tablice {% if is_js %}{% else %} listy{% endif %} powinny być puste.
+</p>
+
+<!-- Explain input and output values -->
+<p>
+   <strong>Wejście:</strong> Dwa argumenty: {% if is_js %}obiekt{% else %}słownik{% endif %} z danymi pracowników,{% if is_js %}n tablica{% else %} lista{% endif %} z opisem potrzeb biznesowych.
+</p>
+
+<p>
+   <strong>Dane wyjściowe:</strong> Tablica{% if is_js %}n dwóch tablic{% else %} lista dwóch list{% endif %} z nazwami jako ciągami znaków. 
+</p>
+
+
+<p>
+    <strong>Przykłady:</strong>
+</p>
+
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+
+<!-- Here you can explain how it can be used in development -->
+<!-- The section is optional -->
+<!-- <p class="for_info_only">
+    <strong>How it’s used:</strong>
+    <i>Schedule optimizing is a usual thing.</i>
+</p> -->
+
+<!-- Here you can explain some constraints for input-->
+<!-- The section is optional -->
+<!-- <p>
+    <strong>Preconditions:</strong>
+    <ul>
+    <li><i>both given ints should be between -1000 and 1000</i></li>
+    </ul>
+</p> -->
