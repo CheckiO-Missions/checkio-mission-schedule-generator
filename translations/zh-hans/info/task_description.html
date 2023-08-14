@@ -1,0 +1,67 @@
+<!-- Describe task in general -->
+
+<p style="text-align: center;">
+    <img  title="example" src="{{MEDIA}}work-schedule.png" alt="example" style="max-height: 300px"/>
+</p>
+
+<p style="text-align: justify;">
+    您会得到一系列员工的工作偏好和技能。此外，您还需要满足工作时间和任务方面的业务需求。您的功能应该返回一个时间表，以满足业务需求和可用员工（如果可能的话）。现在，让我们深入了解一下细节。
+</p>
+<p style="text-align: justify;">
+    <b>staff</b> 是一个{% if is_js %}n 对象{% else %} 字典{% endif %} ，其中键是员工姓名，值也是{% if is_js %}对象{% else %} 字典{% endif %} 。每个值{% if is_js %}对象{% else %}字典{% endif %} 包括三个键值对：
+    <ul>
+        <li>
+            <b>"pref_shifts"</b> -{% if is_js %}数组{% else %}字符串列表{% endif %} ：班次，员工希望在哪个班次工作（可以是<b>"first"</b> 、<b>"second"</b> 或两个都是，按此顺序排列）；
+        </li>
+        <li>
+            <b>"days_off"</b> -{% if is_js %}数组{% else %}列出{% endif %} 的字符串：员工希望休息的日子（工作日的全称）；
+        </li>
+        <li>
+            <b>"skills"</b> -{% if is_js %}数组{% else %}列出{% endif %} 的字符串：工作，员工可从事的工作。
+        </li>
+    </ul>
+</p>
+<p style="text-align: justify;">
+    <b>business_needs</b> 是一个{% if is_js %}n 数组{% else %} 列表{% endif %} ，包含三个值：工作日--字符串；这一天的班次数--整数；这一天应完成的任务--{% if is_js %}数组{% else %}列表{% endif %} ，包含字符串。
+</p>
+<p style="text-align: justify;">
+    关于轮班的注意事项。每个员工可以在第一班、第二班或两班（全天）工作，不包括休息日。业务班次数是指这一天不同班次的数量。例如，如果班次数为<b>3</b> ，则可由一名全天工作的员工（他的两个班次，"一班 "和 "二班"，总计 - 2）和更多的员工（因为每个员工至少有一个班次），或由不同员工的三个班次组成。班次数应平均分配给<b>"first"</b> 和<b>"second"</b> 日班。如果班次数为奇数（且不等于 1），<b>"first"</b> 日班必须比<b>"second"</b> 日班多一个班次。    
+</p>
+<p style="text-align: justify;">
+    不同员工的技能可能部分/完全相同。因此，在填补日班空缺时，应选择技能数量较少的员工--他们的薪酬通常较低。如果数量相同，则按姓名字母顺序选择。从员工参与的角度来看，第一天的班次具有优先权：让技能较少的员工在那里工作更重要。任务是必须完成的最低顺序--这一天的综合技能顺序可以更宽。每项任务都必须由<b>"first"</b> 或<b>"second"</b> 日班的员工完成（包含相应的技能）。
+</p>
+<p style="text-align: justify;">
+    您的函数应返回一个{% if is_js %}n 数组，该数组由两个数组{% else %} 两个列表{% endif %} （日班）组成，其中包含按字母顺序排列的员工姓名，这些员工将在各自的日班工作。如果班次数为<b>1</b> - 则其中一个内部{% if is_js %}数组{% else %}列表{% endif %} 将为空。如果无法制定时间表，则两个内部{% if is_js %}数组{% else %}列表{% endif %} 都应为空。
+</p>
+
+<!-- Explain input and output values -->
+<p>
+   <strong>输入：</strong>两个参数：{% if is_js %}一个对象{% else %}一个包含雇员数据的字典{% endif %} ，一个{% if is_js %}n 数组{% else %} 包含业务需求描述的列表{% endif %} 。
+</p>
+
+<p>
+   <strong>输出：</strong>两个数组{% if is_js %}n 数组{% else %} 两个列表{% endif %} 的列表，名称为字符串。 
+</p>
+
+
+<p>
+    <strong>示例</strong>
+</p>
+
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+
+<!-- Here you can explain how it can be used in development -->
+<!-- The section is optional -->
+<!-- <p class="for_info_only">
+    <strong>How it’s used:</strong>
+    <i>Schedule optimizing is a usual thing.</i>
+</p> -->
+
+<!-- Here you can explain some constraints for input-->
+<!-- The section is optional -->
+<!-- <p>
+    <strong>Preconditions:</strong>
+    <ul>
+    <li><i>both given ints should be between -1000 and 1000</i></li>
+    </ul>
+</p> -->
