@@ -1,0 +1,67 @@
+<!-- Describe task in general -->
+
+<p style="text-align: center;">
+    <img  title="example" src="{{MEDIA}}work-schedule.png" alt="example" style="max-height: 300px"/>
+</p>
+
+<p style="text-align: justify;">
+    Sie erhalten eine Reihe von Mitarbeitern mit deren Arbeitsvorlieben und Fähigkeiten. Außerdem haben Sie geschäftliche Anforderungen in Bezug auf die erforderliche Arbeitszeit und die Aufgaben. Ihre Funktion sollte einen Zeitplan zurückgeben, der die geschäftlichen Anforderungen mit den verfügbaren Mitarbeitern erfüllt (wenn das möglich ist). Lassen Sie uns nun in die Details gehen.
+</p>
+<p style="text-align: justify;">
+    <b>staff</b> ist ein{% if is_js %}n Object{% else %} dictionary{% endif %}, wobei die Schlüssel Namen von Mitarbeitern und die Werte {% if is_js %}Objects{% else %} dictionaries{% endif %} sind. Jedes Werte {% if is_js %}Objekt{% else %}wörterbuch{% endif %} enthält drei Schlüssel-Wert-Paare:
+    <ul>
+        <li>
+            <b>"pref_shifts"</b> - {% if is_js %}array{% else %}list{% endif %} of strings: shifts, employee wants to work at (kann <b>"first"</b>, <b>"second"</b> oder beides in dieser Reihenfolge sein);
+        </li>
+        <li>
+            <b>"days_off"</b> - {% if is_js %}array{% else %}list{% endif %} of strings: Tage, an denen der Mitarbeiter frei haben möchte (vollständige Namen der Wochentage);
+        </li>
+        <li>
+            <b>"skills"</b> - {% if is_js %}array{% else %}list{% endif %} of strings: Jobs, die der Mitarbeiter machen darf.
+        </li>
+    </ul>
+</p>
+<p style="text-align: justify;">
+    <b>business_needs</b> ist ein{% if is_js %}n array{% else %} list{% endif %} von drei Werten: ein Wochentag, für den ein Zeitplan erstellt werden soll - string; Anzahl der Schichten, die an diesem Tag sein sollen - integer; Aufgaben, die an diesem Tag erledigt werden sollen - {% if is_js %}array{% else %}list{% endif %} von strings.
+</p>
+<p style="text-align: justify;">
+    Hinweis zu den Schichten. Jeder Mitarbeiter kann in der ersten Schicht, in der zweiten Schicht oder in beiden Schichten (ganztägig) arbeiten, außer an seinen freien Tagen. Die Anzahl der Schichten für ein Unternehmen bedeutet die Anzahl der verschiedenen Schichten, die an diesem Tag vorhanden sind. Wenn die Anzahl der Schichten <b>3</b> beispielsweise von einem Mitarbeiter abgedeckt wird, der den ganzen Tag arbeitet (seine beiden Schichten, "erste" und "zweite", insgesamt - 2) und einem weiteren Mitarbeiter (denn jeder Mitarbeiter hat mindestens eine Schicht), oder von drei Schichten eines anderen Mitarbeiters. Die Anzahl der Schichten sollte zu gleichen Teilen auf <b>"first"</b> und <b>"second"</b> aufgeteilt werden. Wenn die Anzahl der Schichten ungerade ist (und nicht gleich 1), muss <b>"first"</b> Tagesschicht eine Schicht mehr enthalten als <b>"second"</b> Tagesschicht.    
+</p>
+<p style="text-align: justify;">
+    Die Fähigkeiten können bei verschiedenen Mitarbeitern teilweise/vollständig gleich sein. Wenn Sie also die Tagesschichten besetzen, wählen Sie Mitarbeiter mit einer geringeren Anzahl von Fähigkeiten - sie werden in der Regel schlechter bezahlt. Wenn die Anzahl gleich ist, wählen Sie alphabetisch nach Namen aus. Aus der Sicht der Mitarbeiter hat die erste Tagesschicht Vorrang: Es ist wichtiger, dass dort Mitarbeiter mit weniger Fähigkeiten eingesetzt werden. Die Aufgaben sind eine Mindestreihenfolge, die erledigt werden muss - die Reihenfolge der aggregierten Fähigkeiten für diesen Tag kann breiter sein. Jede Aufgabe muss von jemandem auf <b>"first"</b> oder <b>"second"</b> erledigt werden (mit der entsprechenden Fähigkeit).
+</p>
+<p style="text-align: justify;">
+    Ihre Funktion sollte ein{% if is_js %}n Array aus zwei Arrays{% else %} Liste aus zwei Listen{% endif %} (Tagesschichten) mit alphabetisch sortierten Namen von Mitarbeitern zurückgeben, die in der jeweiligen Tagesschicht arbeiten werden. Wenn die Anzahl der Schichten <b>1</b> - ist, wird eine der inneren {% if is_js %}Arrays{% else %}Listen{% endif %} leer sein. Wenn es nicht möglich ist, einen Zeitplan zu erstellen - sollten beide inneren {% if is_js %}Arrays{% else %}Listen{% endif %} leer sein.
+</p>
+
+<!-- Explain input and output values -->
+<p>
+   <strong>Eingabe:</strong> Zwei Argumente: {% if is_js %}ein Objekt{% else %}ein Wörterbuch{% endif %} mit Mitarbeiterdaten, ein{% if is_js %}n Array{% else %} Liste{% endif %} mit der Beschreibung des Geschäftsbedarfs.
+</p>
+
+<p>
+   <strong>Ausgabe:</strong> Ein{% if is_js %}n Array aus zwei Arrays{% else %} Liste aus zwei Listen{% endif %} mit Namen als Strings. 
+</p>
+
+
+<p>
+    <strong>Beispiele:</strong>
+</p>
+
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+
+<!-- Here you can explain how it can be used in development -->
+<!-- The section is optional -->
+<!-- <p class="for_info_only">
+    <strong>How it’s used:</strong>
+    <i>Schedule optimizing is a usual thing.</i>
+</p> -->
+
+<!-- Here you can explain some constraints for input-->
+<!-- The section is optional -->
+<!-- <p>
+    <strong>Preconditions:</strong>
+    <ul>
+    <li><i>both given ints should be between -1000 and 1000</i></li>
+    </ul>
+</p> -->
